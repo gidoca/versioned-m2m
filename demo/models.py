@@ -8,5 +8,8 @@ class FirstModel(Versionable):
 class SecondModel(Versionable):
     g = models.TextField()
 
-    other = VersionedManyToManyField(FirstModel)
+    other = VersionedManyToManyField(FirstModel, through = 'Intermediary')
 
+class Intermediary(Versionable):
+    firstmodel = models.ForeignKey(FirstModel)
+    secondmodel = models.ForeignKey(SecondModel)
